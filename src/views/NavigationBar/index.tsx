@@ -1,11 +1,11 @@
 import { AppBar, Box, Button, Container, FormControl, IconButton, InputAdornment, OutlinedInput, Toolbar, Typography } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
-import { useState } from "react";
+import React, { useState } from "react";
 
 export default function NavigationBar(){
 
     //      HOOK        //
-    const [content ,setContent] = useState<string>('');
+    const [content, setContent] = useState<string>('');
 
     //      Event Handler       //
     const onSearchKeyPressHandler = (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -13,18 +13,19 @@ export default function NavigationBar(){
         onSearchHandler();
     }
 
+    const onSearchPressHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+        onSearchHandler();
+    }
+
     const onSearchHandler = () => {
-        if(!content.trim){
-            alert('Please Enter your Search term')
+        if(!content.trim()){
+            alert('Please insert your Search keywords');
         }
-        else
-            alert('You searched ' + content)
-        
     }
 
     return(
         <Box sx={{flexGrow: 1}}>
-            <AppBar position="static" variant="outlined">
+            <AppBar position="static" variant="outlined" sx={{backgroundColor:'#f2f3f4'}}>
                     <Toolbar>
                         <Typography
                             variant="h5"
@@ -35,7 +36,8 @@ export default function NavigationBar(){
                                 display: {xs: 'flex', md:'flex'},
                                 fontFamily: 'monospace',
                                 fontWeight: 700,
-                                textDecorationL:'none'
+                                textDecorationL:'none',
+                                color: '#212f3d'
                             }}
                         >
                             DREAM BOARD CONTENTS
@@ -49,7 +51,7 @@ export default function NavigationBar(){
                                     placeholder="Search..."
                                     endAdornment={
                                         <InputAdornment position="end">
-                                            <IconButton edge="end">
+                                            <IconButton edge="end" onClick={onSearchPressHandler}>
                                                 <SearchIcon/>
                                             </IconButton>
                                         </InputAdornment>
@@ -64,7 +66,7 @@ export default function NavigationBar(){
                         <Button size="large" variant="text" sx={{borderColor:'#000000', color:'#000000', fontWeight:700}}>
                             Login
                         </Button>
-                        <Typography sx={{fontSize:'10px', fontWeight: 500, pl:'5px'}}>are you new?</Typography>
+                        <Typography sx={{fontSize:'10px', fontWeight: 500, pl:'5px', color:'#212f3d'}}>are you new?</Typography>
                         <Button size="large" variant="text" sx={{borderColor:'#000000', color:'#000000', fontWeight:700}}>
                             Sign in
                         </Button>
